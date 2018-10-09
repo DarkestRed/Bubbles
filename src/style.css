@@ -1,0 +1,40 @@
+.container {
+    margin: 0 auto;
+    width: 98%;
+    height: 96vh;
+    background-color: #acdddc;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.field {
+    position: absolute;
+    top: 10px;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 40px;
+    color: #333333;
+    background-color: #eee;
+    border-radius: 10px;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    user-select: none;
+}
+
+.score {
+    left: 10px;
+}
+
+.lives {
+    right: 10px;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px 0 black;
+}
