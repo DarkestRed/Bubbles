@@ -34,22 +34,22 @@ gulp.task("css", () => {
             compatibility: 'ie8',
             format: 'beautify'
         }))
-        .pipe(gulp.dest("./dist/css"))
+        .pipe(gulp.dest("./dist"))
         .pipe(cleanCSS({
             compatibility: 'ie8'
         }))
         .pipe(rename({suffix: ".min"}))
-        .pipe(gulp.dest("./dist/css"))
+        .pipe(gulp.dest("./dist"))
         .pipe(browserSync.reload({stream: true}))
 });
 
 gulp.task("js", () => {
     gulp.src(paths.js)
         .pipe(babel({presets: ['@babel/env']}))
-        .pipe(gulp.dest("./dist/js"))
+        .pipe(gulp.dest("./dist"))
         .pipe(uglyFly())
         .pipe(rename({suffix: ".min"}))
-        .pipe(gulp.dest("./dist/js"))
+        .pipe(gulp.dest("./dist"))
         .pipe(browserSync.reload({stream: true}))
 
 });
@@ -64,4 +64,6 @@ gulp.task("clean", () => {
     del.sync("dist");
 });
 
-gulp.task("default", ["clean", "html", "css", "js", "watch", "sync"]);
+gulp.task("default", ["clean", "html", "css", "js"]);
+
+gulp.task("browser", ["watch", "sync"]);
