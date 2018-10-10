@@ -4,6 +4,7 @@ let rename = require("gulp-rename");
 let babel = require("gulp-babel");
 let uglyFly = require('gulp-uglyfly');
 let browserSync = require("browser-sync");
+let del = require("del");
 
 
 let paths = {
@@ -54,10 +55,15 @@ gulp.task("js", () => {
         .pipe(browserSync.reload({ stream: true }))
 
 });
+
 gulp.task("watch", () => {
     gulp.watch(paths.html, ['html']);
     gulp.watch(paths.css, ['css']);
     gulp.watch(paths.js, ['js']);
 });
 
-gulp.task("default", ["html", "css", "js", "watch", "sync"]);
+gulp.task("clean", () => {
+    del.sync("dist");
+});
+
+gulp.task("default", ["clean", "html", "css", "js", "sync", "watch"]);
