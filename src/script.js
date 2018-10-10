@@ -99,8 +99,8 @@ class Bubble {
             else if (scoreCounter === 89) genInt = 1500;
             else if (scoreCounter === 144) speed = 5000;
             else if (scoreCounter === 233) genInt = 1000;
-            if (livesCounter > 0) addInt = setTimeout(int, random(genInt, genInt - 750));
-        }, 1000);
+            if (livesCounter > 0) addInt = setTimeout(int, random(genInt, genInt - 500));
+        }, 0);
     }
 }
 
