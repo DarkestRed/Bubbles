@@ -6,13 +6,11 @@ let uglyFly = require('gulp-uglyfly');
 let browserSync = require("browser-sync");
 let del = require("del");
 
-
 let paths = {
     html: "./src/*.html",
     css: "./src/*.css",
     js: "./src/*.js"
 };
-
 
 gulp.task("sync", () => {
     browserSync.init({
@@ -22,7 +20,6 @@ gulp.task("sync", () => {
         notify: false
     })
 });
-
 
 gulp.task("html", () => {
     gulp.src(paths.html)
@@ -66,4 +63,4 @@ gulp.task("clean", () => {
     del.sync("dist");
 });
 
-gulp.task("default", ["clean", "html", "css", "js", "sync", "watch"]);
+gulp.task("default", ["clean", "html", "css", "js", "watch", "sync"]);

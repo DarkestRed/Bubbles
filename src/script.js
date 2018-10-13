@@ -2,8 +2,9 @@ function random(a, b) {
     return Math.round(Math.random() * (b - a)) + a;
 }
 
+
 function animate(startValue, endValue, time, onFrame, onEnd) {
-    let frames = time / 5;
+    let frames = time / 10;
     let step = (endValue - startValue) / frames;
     let up = endValue > startValue;
     let inter = setInterval(function () {
@@ -14,11 +15,13 @@ function animate(startValue, endValue, time, onFrame, onEnd) {
             if (onEnd) onEnd();
         }
         onFrame(startValue);
-    }, 5);
+    }, 10);
 }
+
 
 let scoreCounter = 0;
 let livesCounter = 10;
+
 
 class Bubble {
 
@@ -26,11 +29,13 @@ class Bubble {
         window.addEventListener("load", e => this.init());
     }
 
+
     init() {
         this.loadComponents();
         this.bindEvents();
         this.bubbleGen();
     }
+
 
     loadComponents() {
         this.container = document.querySelector(".container");
@@ -40,11 +45,13 @@ class Bubble {
         this.lives.innerText = livesCounter;
     }
 
+
     bindEvents() {
         this.container.addEventListener("click", e => {
             if (e.target.matches(".bubble")) this.delBubble(e.target);
         })
     }
+
 
     addBubble(speed) {
         let bubble = document.createElement("div");
@@ -70,14 +77,18 @@ class Bubble {
 
         animate(bubblePosBottom, containerHeight + bubbleSize, speed, function (v) {
             bubble.style.bottom = v + "px";
-        }, function () {
-            bubble.remove();
-            // livesCounter--;
+        }, e => {
+            if (bubble.closest("body")) {
+                bubble.remove();
+                livesCounter--;
+                this.lives.innerText = livesCounter;
+                if (livesCounter === 0) {
+                    alert("Игра окончена!\nВы набрали " + livesCounter + " очков.")
+                }
+            }
         });
-
-        this.lives.innerText = livesCounter;
-
     }
+
 
     delBubble(clickedBubble) {
         clickedBubble.remove();
@@ -85,24 +96,26 @@ class Bubble {
         this.score.innerText = scoreCounter;
     }
 
+
     bubbleGen() {
-        let genInt = 3500;
-        let speed = 7000;
+        let genInt = 2000;
+        let speed = 5000;
         let addInt = setTimeout(function int() {
             bubble.addBubble(random(speed, speed - 1000));
-            if (scoreCounter === 5) genInt = 3000;
-            else if (scoreCounter === 8) speed = 6500;
-            else if (scoreCounter === 13) genInt = 2500;
-            else if (scoreCounter === 21) speed = 6000;
-            else if (scoreCounter === 34) genInt = 2000;
-            else if (scoreCounter === 55) speed = 5500;
-            else if (scoreCounter === 89) genInt = 1500;
-            else if (scoreCounter === 144) speed = 5000;
-            else if (scoreCounter === 233) genInt = 1000;
+            if (scoreCounter > 233) genInt = 750;
+            else if (scoreCounter > 144) speed = 3000;
+            else if (scoreCounter > 89) genInt = 1000;
+            else if (scoreCounter > 55) speed = 3500;
+            else if (scoreCounter > 34) genInt = 1250;
+            else if (scoreCounter > 21) speed = 4000;
+            else if (scoreCounter > 13) genInt = 1500;
+            else if (scoreCounter > 8) speed = 4500;
+            else if (scoreCounter > 5) genInt = 1750;
             if (livesCounter > 0) addInt = setTimeout(int, random(genInt, genInt - 500));
         }, 0);
     }
 }
+
 
 let bubble = new Bubble();
 bubble.start();
