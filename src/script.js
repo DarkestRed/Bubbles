@@ -83,7 +83,7 @@ class Bubble {
                 livesCounter--;
                 this.lives.innerText = livesCounter;
                 if (livesCounter === 0) {
-                    alert("Игра окончена!\nВы набрали " + livesCounter + " очков.")
+                    alert("Игра окончена!\nВы набрали " + scoreCounter + " очков.")
                 }
             }
         });
