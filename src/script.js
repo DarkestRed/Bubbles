@@ -82,8 +82,9 @@ class Bubble {
                 bubble.remove();
                 livesCounter--;
                 this.lives.innerText = livesCounter;
-                if (livesCounter === 0) {
-                    alert("Игра окончена!\nВы набрали " + scoreCounter + " очков.")
+                if (livesCounter < 0) {
+                    alert("Игра окончена!\nВы набрали " + scoreCounter + " очков.");
+                    window.location.reload();
                 }
             }
         });
@@ -111,7 +112,7 @@ class Bubble {
             else if (scoreCounter > 13) genInt = 1500;
             else if (scoreCounter > 8) speed = 4500;
             else if (scoreCounter > 5) genInt = 1750;
-            if (livesCounter > 0) addInt = setTimeout(int, random(genInt, genInt - 500));
+            if (livesCounter >= 0) addInt = setTimeout(int, random(genInt, genInt - 500));
         }, 0);
     }
 }
